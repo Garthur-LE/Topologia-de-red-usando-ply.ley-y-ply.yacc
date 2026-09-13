@@ -1,0 +1,13 @@
+# Fuente de salida seria spout
+FUENTE f1
+# Operador seria bolt
+OPERADOR ope1 TIEMPO_SERVICIO 10 REPLICAS 2
+# Punto final de la coneccion
+SUMIDERO s1
+# Conecion de fuente a operador
+CONECTAR f1 A ope1
+# conexion de operador a sumidero
+CONECTAR ope1 A s1
+CONECTAR ope1 A s2
+# Simulacion total de eventos
+SIMULAR 1
