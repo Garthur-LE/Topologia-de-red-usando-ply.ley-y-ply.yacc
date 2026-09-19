@@ -2,7 +2,7 @@ Asignatura: Lenguajes de Programación II
 
 ## Integrantes
 Gabriel Gonzalez
-[Nombre Integrante 2]
+Ricardo Gil
 [Nombre Integrante 3]
 
 ## 1. Instrucciones de Ejecución
