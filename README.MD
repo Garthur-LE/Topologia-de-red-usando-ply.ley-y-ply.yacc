@@ -3,7 +3,7 @@ Asignatura: Lenguajes de Programación II
 ## Integrantes
 Gabriel Gonzalez
 Ricardo Gil
-[Nombre Integrante 3]
+Eduardo Amigo
 
 ## 1. Instrucciones de Ejecución
 Este proyecto incluye un archivo Makefile para facilitar su ejecución en entornos Linux/Unix. 
