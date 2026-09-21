@@ -1,13 +1,26 @@
-# Fuente de salida seria spout
+# Topología Compleja para probar el DFS y las Réplicas
 FUENTE f1
-# Operador seria bolt
-OPERADOR ope1 TIEMPO_SERVICIO 10 REPLICAS 2
-# Punto final de la coneccion
+
+# Operadores
+OPERADOR ope_inicial TIEMPO_SERVICIO 5
+OPERADOR ope_rapido TIEMPO_SERVICIO 2
+OPERADOR ope_lento TIEMPO_SERVICIO 15 REPLICAS 2
+
+# Sumideros
 SUMIDERO s1
-# Conecion de fuente a operador
-CONECTAR f1 A ope1
-# conexion de operador a sumidero
-CONECTAR ope1 A s1
-CONECTAR ope1 A s2
-# Simulacion total de eventos
-SIMULAR 1
+SUMIDERO s2
+
+# f1 se conecta al operador inicial
+CONECTAR f1 A ope_inicial
+
+# ope_inicial divide el camino hacia dos operadores distintos (Ramificación múltiple)
+CONECTAR ope_inicial A ope_rapido
+CONECTAR ope_inicial A ope_lento
+
+# Los operadores finales van a sus respectivos sumideros
+CONECTAR ope_rapido A s1
+CONECTAR ope_lento A s2
+
+# Ejecutaremos 3 simulaciones para ver cómo el 'ope_lento' alterna sus réplicas
+SIMULAR 3
+

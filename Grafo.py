@@ -1,6 +1,9 @@
 from abc import ABC, abstractmethod
 
 class Topologia_red(ABC):
+    """
+    Clase abstracta base para los nodos de la topología de red.
+    """
     def __init__(self, id):
         self.id = id
         self.tuplas_salientes = [] 
@@ -51,6 +54,9 @@ class DatosSumidero(Topologia_red):
         return [] 
 
 class Grafo_transiciones:
+    """
+    Gestiona la topología de la red, la conexión de nodos y la lógica de simulación.
+    """
     def __init__(self, tabla_simbolos):
         self.tabla = tabla_simbolos
         self.nodos = {}
@@ -87,21 +93,26 @@ class Grafo_transiciones:
         # Alterna la fuente si tiene existen mas
         fuente_inicio = self.fuentes[(numero_evento - 1) % len(self.fuentes)]
         
-        recorrido = {
-            't_acumulado': 0,
-            'ruta': []
-        }
-
-        nodo_actual = fuente_inicio
-        while nodo_actual:
-            siguientes = nodo_actual.transito(recorrido)
+        resultados = []
+        
+        def dfs(nodo, t_acum_actual, ruta_actual):
+            # Clonamos el recorrido para esta rama
+            recorrido_local = {
+                't_acumulado': t_acum_actual,
+                'ruta': ruta_actual.copy()
+            }
+            
+            siguientes = nodo.transito(recorrido_local)
             
             if not siguientes:
-                if not isinstance(nodo_actual, DatosSumidero):
-                    raise RuntimeError("Flujo fallido sin llegar al sumidero")
-                break
+                if not isinstance(nodo, DatosSumidero):
+                    raise RuntimeError(f"Flujo fallido sin llegar al sumidero en nodo {nodo.id}")
+                resultados.append(recorrido_local)
+                return
             
-            # Avanza por el primer enlace configurado hacia adelante
-            nodo_actual = siguientes[0]
+            # Recorremos todas las ramas salientes configuradas
+            for sig in siguientes:
+                dfs(sig, recorrido_local['t_acumulado'], recorrido_local['ruta'])
 
-        return recorrido
+        dfs(fuente_inicio, 0, [])
+        return resultados
