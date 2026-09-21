@@ -81,4 +81,8 @@ Acceso seguro a diccionarios (KeyError): "Para validar si un nodo existe, estaba
 
 Error semántico (Typo en el .txt): "El script me lanza RuntimeError: Flujo fallido sin llegar al sumidero. Ya vi que en el archivo red.txt creé el operador como ope1, pero en el CONECTAR le pasé op1. Como el diccionario no lo encontró, el nodo f1 quedó flotando sin conexiones. ¿Solo tengo que corregir el nombre en el txt verdad?" Este ultimo lo vio la IA yo solo le envie todo por que no podia encontrar que fallaba jaja.
 
+Manejo de múltiples ramas (Grafo): "El simulador solo avanza por el primer nodo que encuentra (siguientes[0]). ¿Cómo puedo adaptar el ciclo while usando recursividad (DFS) para que recorra todas las ramas conectadas sin cambiar mucho la estructura?"
 
+IndexError en PLY: "Cuando declaro un operador sin el atributo REPLICAS, mi yacc devuelve una tupla de 5 elementos en vez de 6, y la simulación crashea al buscar i[5]. ¿Cómo valido el largo de la tupla antes de insertar?"
+
+Excepción silenciosa: "Estoy haciendo return ValueError() para evitar duplicados en mi tabla, pero el programa no se detiene ni muestra el error en consola. ¿Debo usar 'raise' en lugar de 'return'?"

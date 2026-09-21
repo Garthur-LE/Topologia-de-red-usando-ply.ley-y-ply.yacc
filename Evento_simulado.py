@@ -25,7 +25,10 @@ def uso_lex_yacc(path):
             nodo.insertar_nodo(i[1], i[0])
 
         elif i[0] == 'OPERADOR':
-            nodo.insertar_nodo(i[1], i[0], t_servicio = i[3], replicas=i[5])
+            if len(i) == 6:
+                nodo.insertar_nodo(i[1], i[0], t_servicio = i[3], replicas=i[5])
+            else:
+                nodo.insertar_nodo(i[1], i[0], t_servicio = i[3], replicas=1)
 
         elif i[0] == 'SUMIDERO':
             nodo.insertar_nodo(i[1], i[0])
@@ -65,6 +68,7 @@ if __name__ == '__main__':
 
         #Inicio de simulacion
         for evento in range(1, int(num_simulaciones) + 1):
-            resultado = grafo.simular_evento(evento)
-            print(f"Evento {evento}: Ruta = {' -> '.join(resultado['ruta'])}")
-            print(f"Tiempo total = {resultado['t_acumulado']} |")
+            resultados = grafo.simular_evento(evento)
+            for i, resultado in enumerate(resultados):
+                print(f"Evento {evento} (Rama {i+1}): Ruta = {' -> '.join(resultado['ruta'])}")
+                print(f"Tiempo total = {resultado['t_acumulado']} |")
