@@ -1,0 +1,91 @@
+# Archivo de pruebas de errores
+# Para probar un caso, descomentar el caso eliminando los #
+# Solo debe quedar un caso activo por prueba.
+
+# CASO 1: nodo duplicado.
+# Resultado esperado: ValueError: Nodo Duplicado
+# FUENTE fuente1
+# FUENTE fuente1
+# SUMIDERO sumidero1
+# CONECTAR fuente1 A sumidero1
+# SIMULAR 1
+
+# CASO 2: conexión a un nodo inexistente.
+# Resultado esperado: mensaje de nodo inexistente y posterior flujo fallido.
+# FUENTE fuente1
+# SUMIDERO sumidero1
+# CONECTAR fuente1 A nodo_inexistente
+# SIMULAR 1
+
+# CASO 3: instrucción incompleta.
+# Resultado esperado: Error de sintaxis en la entrada.
+# FUENTE fuente1
+# OPERADOR operador1 TIEMPO_SERVICIO
+# SUMIDERO sumidero1
+# SIMULAR 1
+
+# CASO 4: palabra reservada mal escrita.
+# Resultado esperado: Error de sintaxis en la entrada.
+# FUENTE fuente1
+# OPERADOR operador1 TIEMPO_SERVICO 5
+# SUMIDERO sumidero1
+# SIMULAR 1
+
+# CASO 5: carácter ilegal.
+# Resultado esperado: Illegal character '@'.
+# FUENTE fuente1@
+# SUMIDERO sumidero1
+# SIMULAR 1
+
+# CASO 6: operador sin salida hacia un sumidero.
+# Resultado esperado: RuntimeError: Flujo fallido sin llegar al sumidero.
+# FUENTE fuente1
+# OPERADOR operador1 TIEMPO_SERVICIO 5
+# SUMIDERO sumidero1
+# CONECTAR fuente1 A operador1
+# SIMULAR 1
+
+# CASO 7: red sin fuente.
+# Resultado esperado: ValueError: No existen nodos fuente en la red.
+# OPERADOR operador1 TIEMPO_SERVICIO 5
+# SUMIDERO sumidero1
+# CONECTAR operador1 A sumidero1
+# SIMULAR 1
+
+# CASO 8: red sin sumidero.
+# Resultado esperado: ValueError: No existen nodos sumideros en la red.
+# FUENTE fuente1
+# OPERADOR operador1 TIEMPO_SERVICIO 5
+# CONECTAR fuente1 A operador1
+# SIMULAR 1
+
+# CASO 9: cantidad de réplicas inválida.
+# Resultado esperado actual: ZeroDivisionError durante Round Robin.
+#FUENTE fuente1
+#OPERADOR operador1 TIEMPO_SERVICIO 5 REPLICAS 0
+#SUMIDERO sumidero1
+#CONECTAR fuente1 A operador1
+#CONECTAR operador1 A sumidero1
+#SIMULAR 1
+
+#FUENTE f1
+#OPERADOR ope_pesado TIEMPO_SERVICIO 30 REPLICAS 4
+#SUMIDERO s1
+#CONECTAR f1 A ope_pesado
+#CONECTAR ope_pesado A s1
+#SIMULAR 5
+
+#FUENTE f1
+#SUMIDERO s1
+#CONECTAR f1 A nodo_fantasma
+#SIMULAR 1
+
+#FUENTE f1
+#FUENTE f1
+
+FUENTE f1
+OPERADOR ope_pesado TIEMPO_SERVICIO 30 REPLICAS 4
+SUMIDERO s1
+CONECTAR f1 A ope_pesado
+CONECTAR ope_pesado A s1
+SIMULAR 5

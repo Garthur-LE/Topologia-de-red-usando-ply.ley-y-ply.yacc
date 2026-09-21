@@ -48,7 +48,7 @@ def p_operador_instruccion_con_replica(p):
 # sin replica usada se asume una sola instancia
 def p_operador_instruccion_sin_replica(p):
     'instruccion_nodo : OPERADOR ID TIEMPO_SERVICIO NUM'
-    p[0] = 'OPERADOR', p[2], 'TIEMPO_SERVICIO', p[4], 1
+    p[0] = 'OPERADOR', p[2], 'TIEMPO_SERVICIO', p[4], 'REPLICAS', 1
 
 def p_sumidero_instruccion(p):
     'instruccion_nodo : SUMIDERO ID'

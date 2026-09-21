@@ -18,7 +18,7 @@ def uso_lex_yacc(path):
         return UserWarning(" Topologia no reconocida/Vacia ")
     
     nodo = crear_tabla_nodos() #Lista de la tabla de simbolos o nodos
-    aristas = [] # Lista de las aristas u conexiones
+    aristas = [] # Lista de las aristas o conexiones
     simulaciones = 0
     for i in instruccciones:
         if i[0] == 'FUENTE':

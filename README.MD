@@ -6,12 +6,35 @@ Ricardo Gil
 Eduardo Amigo
 
 ## 1. Instrucciones de Ejecución
-Este proyecto incluye un archivo Makefile para facilitar su ejecución en entornos Linux/Unix. 
-Para correr el intérprete y la simulación, ubíquese en el directorio del proyecto y utilice los siguientes comandos en la terminal:
+El proyecto incluye un `Makefile` para Linux y macOS. Ubíquese en el directorio del proyecto y ejecute:
 
-Instalar dependencias (PLY):** `make setup`
-Ejecutar el intérprete:** `make run` (Este comando lee el archivo `red.txt` e imprime la simulación por consola).
-Limpiar archivos precompilados:** `make clean` (Elimina cachés y archivos temporales generados por Yacc).
+```bash
+make setup
+make run
+```
+
+`make setup` crea el entorno virtual `.venv` e instala PLY desde `requirements.txt`.
+`make run` ejecuta `Evento_simulado.py`, que lee `red.txt` e imprime la simulación por consola.
+
+Para eliminar archivos generados por PLY y las cachés de Python:
+
+```bash
+make clean
+```
+
+Para eliminar también el entorno virtual:
+
+```bash
+make distclean
+```
+
+El Makefile usa `python3` por defecto. Si el sistema utiliza otro comando, puede indicarlo así:
+
+```bash
+make PYTHON=python setup
+make PYTHON=python run
+```
+
 Asegúrese de que el archivo con la topología se llame exactamente `red.txt` y se encuentre en la raíz del proyecto.
 
 ## 2. Expresiones Regulares

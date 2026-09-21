@@ -3,10 +3,22 @@ from abc import ABC, abstractmethod
 class Topologia_red(ABC):
     def __init__(self, id):
         self.id = id
-        self.tuplas_salientes = [] 
+        self.tuplas_salientes = []
+        self.turno_salida = 0
         
     def _destino(self, destino):
         self.tuplas_salientes.append(destino)
+
+# Función que maneja el caso en que un nodo tiene varias salidas, alternando la salida después de cada evento.
+    def siguiente_destino(self):
+        if not self.tuplas_salientes:
+            return None
+
+        destino = self.tuplas_salientes[
+            self.turno_salida % len(self.tuplas_salientes)
+        ]
+        self.turno_salida += 1
+        return destino
 
     @abstractmethod
     def transito(self, recorrido):
@@ -24,7 +36,7 @@ class DatosOperador(Topologia_red):
         super().__init__(id)
         self.t_servicio = int(t_servicio)
         self.replicas = int(replicas)
-        # variable que realiza roud robin
+        # variable que realiza round robin
         self.turno_replica = 0 
 
     def siguiente_replica(self):
@@ -79,7 +91,7 @@ class Grafo_transiciones:
 
     def validar_topologia(self):
         if not self.fuentes:
-            raise ValueError("La existen nodos fuente en la red")
+            raise ValueError("No existen nodos fuente en la red")
         if not self.sumideros:
             raise ValueError("No existen nodos sumideros en la red")
 
@@ -101,7 +113,7 @@ class Grafo_transiciones:
                     raise RuntimeError("Flujo fallido sin llegar al sumidero")
                 break
             
-            # Avanza por el primer enlace configurado hacia adelante
-            nodo_actual = siguientes[0]
+            # Reparte los eventos entre las salidas de forma circular.
+            nodo_actual = nodo_actual.siguiente_destino()
 
         return recorrido

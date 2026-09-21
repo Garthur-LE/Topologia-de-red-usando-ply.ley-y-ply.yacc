@@ -1,13 +1,32 @@
-# Fuente de salida seria spout
-FUENTE f1
-# Operador seria bolt
-OPERADOR ope1 TIEMPO_SERVICIO 10 REPLICAS 2
-# Punto final de la coneccion
-SUMIDERO s1
-# Conecion de fuente a operador
-CONECTAR f1 A ope1
-# conexion de operador a sumidero
-CONECTAR ope1 A s1
-CONECTAR ope1 A s2
-# Simulacion total de eventos
-SIMULAR 1
+# Dos fuentes externas.
+FUENTE fuente1
+FUENTE fuente2
+
+# Operador compartido por ambas fuentes.
+OPERADOR operador1 TIEMPO_SERVICIO 2 REPLICAS 2
+
+# Dos ramas de procesamiento.
+OPERADOR operador2 TIEMPO_SERVICIO 5
+OPERADOR operador3 TIEMPO_SERVICIO 7 REPLICAS 2
+
+# Las ramas convergen y luego terminan.
+OPERADOR operador4 TIEMPO_SERVICIO 4
+OPERADOR operador5 TIEMPO_SERVICIO 1
+SUMIDERO sumidero1
+
+# Ambas fuentes alimentan la topologia.
+CONECTAR fuente1 A operador1
+CONECTAR fuente2 A operador1
+
+# La salida de operador1 se reparte, alternando entre dos ramas.
+CONECTAR operador1 A operador2
+CONECTAR operador1 A operador3
+
+# Ambas ramas convergen en el mismo operador.
+CONECTAR operador2 A operador4
+CONECTAR operador3 A operador4
+CONECTAR operador4 A operador5
+CONECTAR operador5 A sumidero1
+
+# Simular varios eventos para observar fuentes y ramas alternadas.
+SIMULAR 8

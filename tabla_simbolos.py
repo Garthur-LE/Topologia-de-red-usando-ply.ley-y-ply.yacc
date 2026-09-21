@@ -17,7 +17,7 @@ class crear_tabla_nodos:
     def insertar_nodo(self, id, tipo, t_servicio = 0, replicas = 1):
         #no duplicados 
         if id in self._tabla_nodos:
-            return ValueError("\t Nodo Duplicado")
+            raise ValueError("\t Nodo Duplicado")
         else:
             self._tabla_nodos[id]= nodos(id, tipo, t_servicio, replicas)
 
